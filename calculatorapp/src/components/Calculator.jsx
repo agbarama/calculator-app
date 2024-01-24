@@ -6,45 +6,45 @@ const Calculator = () => {
     <div className={styles.container}>
       <input type="text" className={styles.input} />
       <div className={styles.buttonsContainer}>
-        <div className={styles.div}>
-          <button>@</button>
-          <button>-</button>
-          <button>C</button>
-          <button>AC</button>
+        <div className={styles.div1}>
+          <button className={styles.button}>@</button>
+          <button className={styles.button}>-</button>
+          <button className={styles.button}>C</button>
+          <button className={styles.button}>AC</button>
         </div>
-        <div>
-          <button>mc</button>
-          <button>m+</button>
-          <button>mc</button>
-          <button>mr</button>
+        <div className={styles.div1}>
+          <button className={styles.button}>mc</button>
+          <button className={styles.button}>m+</button>
+          <button className={styles.button}>mc</button>
+          <button className={styles.button}>mr</button>
         </div>
-        <div>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>/</button>
-          <button>R</button>
+        <div className={styles.div2}>
+          <button className={styles.button}>7</button>
+          <button className={styles.button}>8</button>
+          <button className={styles.button}>9</button>
+          <button className={styles.button}>/</button>
+          <button className={styles.button}>R</button>
         </div>
-        <div>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>X</button>
-          <button>x^2</button>
+        <div className={styles.div2}>
+          <button className={styles.button}>4</button>
+          <button className={styles.button}>5</button>
+          <button className={styles.button}>6</button>
+          <button className={styles.button}>X</button>
+          <button className={styles.button}>x^2</button>
         </div>
-        <div>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>-</button>
-          <button>1/x</button>
+        <div className={styles.div2}>
+          <button className={styles.button}>1</button>
+          <button className={styles.button}>2</button>
+          <button className={styles.button}>3</button>
+          <button className={styles.button}>-</button>
+          <button className={styles.button}>1/x</button>
         </div>
-        <div>
-          <button>0</button>
-          <button>.</button>
-          <button>+-</button>
-          <button>+</button>
-          <button>=</button>
+        <div className={styles.div2}>
+          <button className={styles.button}>0</button>
+          <button className={styles.button}>.</button>
+          <button className={styles.button}>+-</button>
+          <button className={styles.button}>+</button>
+          <button className={styles.button}>=</button>
         </div>
       </div>
     </div>
