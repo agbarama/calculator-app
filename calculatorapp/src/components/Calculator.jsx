@@ -1,18 +1,82 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from "../styles/calculator.module.css";
 
 const Calculator = () => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState([]);
+  const savedMemory = JSON.parse(localStorage.getItem("memory"));
+  const savedPlans = JSON.parse(localStorage.getItem("summaryPlan"));
+
+  const [memory, setMemory] = useState(savedMemory || []);
+  const [storage, setStorage] = useState("");
+  const [isMemory, setIsMemory] = useState(false);
+
+  // undo
+  const undo = () => {
+    setInput((prevInput) => {
+      const updatedInput = [...prevInput];
+      console.log(updatedInput);
+      const pop = updatedInput.pop();
+      console.log(pop);
+      return updatedInput;
+    });
+  };
+
+  // input delete function
+  const deleteInput = () => {
+    setInput(input.slice(0, -1));
+  };
+
+  // 'AC' function
+  const allClear = () => {
+    setInput("");
+    setMemory("");
+  };
+
+  //  'MC' function
+  const memoryClear = () => {
+    if (isMemory) {
+      setInput("");
+    }
+    localStorage.clear("memory");
+  };
+
+  // 'M+' function
+  const memoryAdd = () => {
+    setMemory([...memory, { storage }]);
+    setStorage("");
+  };
+
+  useEffect(() => {
+    localStorage.setItem("memory", JSON.stringify(memory));
+  }, [storage]);
+
+  // 'M-' function
+  const deleteItem = () => {
+    console.log("deleted");
+    setMemory(memory.slice(0, -1));
+    localStorage.setItem("memory", JSON.stringify(memory));
+  };
+
+  // 'MR' function
+  const restoreMemory = () => {
+    setIsMemory(true);
+    if (isMemory) {
+      memory.map((item) => setInput(item.storage));
+    }
+  };
 
   const handleClick = (value) => {
     setInput((prevInput) => prevInput + value);
-    console.log(typeof value);
+
+    // State to save to local storage
+    setStorage((prevInput) => prevInput + value);
   };
 
   const calculate = () => {
     try {
       setInput(eval(input).toString());
+      setStorage((prevInput) => `${prevInput} = ${+eval(input).toString()}`);
     } catch (error) {
       setInput("Error");
     }
@@ -61,84 +125,180 @@ const Calculator = () => {
       />
       <div className={styles.buttonsContainer}>
         <div className={styles.div1}>
-          <button className={styles.button}>@</button>
-          <button className={styles.button}>-</button>
-          <button className={styles.button} onClick={() => setInput("")}>
+          <button className={`${styles.button} ${styles.peach}`} onClick={undo}>
+            &#x21A9;
+          </button>
+
+          <button
+            className={`${styles.button} ${styles.peach}`}
+            onClick={deleteInput}
+          >
+            &#x2190;
+          </button>
+          <button
+            className={`${styles.button} ${styles.peach}`}
+            onClick={() => setInput("")}
+          >
             C
           </button>
-          <button className={styles.button}>AC</button>
+          <button
+            className={`${styles.button} ${styles.peach}`}
+            onClick={allClear}
+          >
+            AC
+          </button>
         </div>
         <div className={styles.div1}>
-          <button className={styles.button}>mc</button>
-          <button className={styles.button}>m+</button>
-          <button className={styles.button}>mc</button>
-          <button className={styles.button}>mr</button>
+          <button
+            className={`${styles.button} ${styles.green}`}
+            onClick={memoryClear}
+          >
+            mc
+          </button>
+          <button
+            className={`${styles.button} ${styles.green}`}
+            onClick={memoryAdd}
+          >
+            m+
+          </button>
+          <button
+            className={`${styles.button} ${styles.green}`}
+            onClick={deleteItem}
+          >
+            m-
+          </button>
+          <button
+            className={`${styles.button} ${styles.green}`}
+            onClick={restoreMemory}
+          >
+            mr
+          </button>
         </div>
         <div className={styles.div2}>
-          <button className={styles.button} onClick={() => handleClick(7)}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick(7)}
+          >
             7
           </button>
-          <button className={styles.button} onClick={() => handleClick(8)}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick(8)}
+          >
             8
           </button>
-          <button className={styles.button} onClick={() => handleClick(9)}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick(9)}
+          >
             9
           </button>
-          <button className={styles.button} onClick={() => handleClick("/")}>
+          <button
+            className={`${styles.button} ${styles.grey}`}
+            onClick={() => handleClick("/")}
+          >
             /
           </button>
-          <button className={styles.button} onClick={squareRoot}>
+          <button
+            className={`${styles.button} ${styles.grey}`}
+            onClick={squareRoot}
+          >
             R
           </button>
         </div>
         <div className={styles.div2}>
-          <button className={styles.button} onClick={() => handleClick(5)}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick(4)}
+          >
             4
           </button>
-          <button className={styles.button} onClick={() => handleClick(5)}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick(5)}
+          >
             5
           </button>
-          <button className={styles.button} onClick={() => handleClick(6)}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick(6)}
+          >
             6
           </button>
-          <button className={styles.button} onClick={() => handleClick("*")}>
+          <button
+            className={`${styles.button} ${styles.grey}`}
+            onClick={() => handleClick("*")}
+          >
             X
           </button>
-          <button className={styles.button} onClick={() => square()}>
+          <button
+            className={`${styles.button} ${styles.grey}`}
+            onClick={() => square()}
+          >
             x^2
           </button>
         </div>
         <div className={styles.div2}>
-          <button className={styles.button} onClick={() => handleClick("1")}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick("1")}
+          >
             1
           </button>
-          <button className={styles.button} onClick={() => handleClick(2)}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick(2)}
+          >
             2
           </button>
-          <button className={styles.button} onClick={() => handleClick(3)}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick(3)}
+          >
             3
           </button>
-          <button className={styles.button} onClick={() => handleClick("-")}>
+          <button
+            className={`${styles.button} ${styles.grey}`}
+            onClick={() => handleClick("-")}
+          >
             -
           </button>
-          <button className={styles.button} onClick={() => reciprocal()}>
+          <button
+            className={`${styles.button} ${styles.grey}`}
+            onClick={() => reciprocal()}
+          >
             1/x
           </button>
         </div>
         <div className={styles.div2}>
-          <button className={styles.button} onClick={() => handleClick(0)}>
+          <button
+            className={`${styles.button} ${styles.blue}`}
+            onClick={() => handleClick(0)}
+          >
             0
           </button>
-          <button className={styles.button} onClick={() => handleClick(".")}>
+          <button
+            className={`${styles.button} ${styles.grey}`}
+            onClick={() => handleClick(".")}
+          >
             .
           </button>
-          <button className={styles.button} onClick={toggleSign}>
+          <button
+            className={`${styles.button} ${styles.grey}`}
+            onClick={toggleSign}
+          >
             +-
           </button>
-          <button className={styles.button} onClick={() => handleClick("+")}>
+          <button
+            className={`${styles.button} ${styles.grey}`}
+            onClick={() => handleClick("+")}
+          >
             +
           </button>
-          <button className={styles.button} onClick={calculate}>
+          <button
+            className={`${styles.button} ${styles.red}`}
+            onClick={calculate}
+          >
             =
           </button>
         </div>
