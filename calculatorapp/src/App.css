@@ -1,5 +1,8 @@
 body {
   font-family: Arial;
-  display: grid;
-  place-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
 }
