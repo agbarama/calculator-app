@@ -13,13 +13,7 @@ const Calculator = () => {
 
   // undo
   const undo = () => {
-    setInput((prevInput) => {
-      const updatedInput = [...prevInput];
-      console.log(updatedInput);
-      const pop = updatedInput.pop();
-      console.log(pop);
-      return updatedInput;
-    });
+    setInput(input.slice(0, -1));
   };
 
   // input delete function
@@ -68,15 +62,12 @@ const Calculator = () => {
 
   const handleClick = (value) => {
     setInput((prevInput) => prevInput + value);
-
-    // State to save to local storage
-    setStorage((prevInput) => prevInput + value);
   };
 
   const calculate = () => {
     try {
       setInput(eval(input).toString());
-      setStorage((prevInput) => `${prevInput} = ${+eval(input).toString()}`);
+      setStorage(`${input} = ${eval(input).toString()}`);
     } catch (error) {
       setInput("Error");
     }
@@ -85,6 +76,7 @@ const Calculator = () => {
   const square = () => {
     try {
       setInput(Math.pow(eval(input), 2));
+      setStorage(`${input} x ${input}  = ${Math.pow(eval(input), 2)}`);
     } catch (error) {
       setInput("Error");
     }
@@ -110,6 +102,7 @@ const Calculator = () => {
     try {
       // Use eval() to evaluate the expression and Math.sqrt() for square root
       setInput(Math.sqrt(eval(input)).toString());
+      setStorage(`√${input}  = ${Math.pow(eval(input), 2)}`);
     } catch (error) {
       setInput("Error");
     }
@@ -125,15 +118,18 @@ const Calculator = () => {
       />
       <div className={styles.buttonsContainer}>
         <div className={styles.div1}>
-          <button className={`${styles.button} ${styles.peach}`} onClick={undo}>
-            &#x21A9;
+          <button
+            className={`${styles.button} ${styles.peach} ${styles.icon}`}
+            onClick={undo}
+          >
+            ⟲
           </button>
 
           <button
-            className={`${styles.button} ${styles.peach}`}
+            className={`${styles.button} ${styles.peach} ${styles.icon}`}
             onClick={deleteInput}
           >
-            &#x2190;
+            ￩
           </button>
           <button
             className={`${styles.button} ${styles.peach}`}
@@ -229,7 +225,7 @@ const Calculator = () => {
             className={`${styles.button} ${styles.grey}`}
             onClick={() => handleClick("*")}
           >
-            X
+            x
           </button>
           <button
             className={`${styles.button} ${styles.grey}`}
