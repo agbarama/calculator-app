@@ -3,38 +3,36 @@
   place-items: center;
   width: 100%;
   height: 100%;
+  padding: 0 20px;
   padding-bottom: 10px;
-  /* padding: 50px;
-  margin-top: 80px; */
   background-color: #333;
 
   .input {
     background-color: azure;
-    width: 450px;
+    width: 95%;
     height: 94px;
     margin: 20px;
     margin-bottom: 10px;
+    outline: none;
     border: none;
   }
 
   .buttonsContainer {
-    /* display: grid; */
     .div1 {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      /* gap: 20px; */
-      margin: 10px;
+      grid-template-columns: 25% 25% 25% 25%;
+      margin: 12px;
 
       .button {
         font-size: 16px;
         font-weight: bold;
+        text-align: center;
         color: white;
-        /* width: 80px;
-        height: 40px; */
-        padding: 15px 35px;
-        margin-right: 10px;
-        border-radius: 16px;
+        padding: 15.18% 35.02%;
+        margin-right: 12px;
+        border-radius: 10px;
         border: none;
+        cursor: pointer;
       }
 
       .peach {
@@ -48,19 +46,18 @@
 
     .div2 {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      /* gap: 20px; */
-      margin: 10px;
+      grid-template-columns: 20% 20% 20% 20% 20%;
+      margin: 12px;
 
       .button {
         font-size: 16px;
-
         font-weight: bold;
         color: white;
-        padding: 15px 5px;
-        margin-right: 10px;
-        border-radius: 10px;
+        padding: 12px 22px;
+        margin-right: 12px;
+        border-radius: 9px;
         border: none;
+        cursor: pointer;
       }
 
       .blue {
@@ -73,6 +70,98 @@
 
       .red {
         background-color: rgba(247, 127, 127, 0.952);
+      }
+    }
+  }
+}
+
+/* IPhone SE */
+@media only screen and (max-width: 375px) {
+  .container {
+    width: 300px;
+
+    .buttonsContainer {
+      width: 280px;
+
+      .div1 {
+        .button {
+          padding: 15.18% 0.02%;
+        }
+      }
+
+      .div2 {
+        .button {
+          padding: 15% 0.5%;
+        }
+      }
+    }
+  }
+}
+
+/* Iphone 12 Pro */
+@media only screen and (min-width: 376px) and (max-width: 390px) {
+  .container {
+    width: 300px;
+
+    .buttonsContainer {
+      width: 280px;
+
+      .div1 {
+        .button {
+          padding: 15.18% 0.02%;
+        }
+      }
+
+      .div2 {
+        .button {
+          padding: 15% 0.5%;
+        }
+      }
+    }
+  }
+}
+
+/* Iphone XR */
+@media only screen and (min-width: 391px) and (max-width: 414px) {
+  .container {
+    width: 350px;
+
+    .buttonsContainer {
+      width: 330px;
+
+      .div1 {
+        .button {
+          padding: 15.18% 0.02%;
+        }
+      }
+
+      .div2 {
+        .button {
+          padding: 15% 0.5%;
+        }
+      }
+    }
+  }
+}
+
+/* Iphone 14 Pro Max */
+@media only screen and (min-width: 415px) and (max-width: 430px) {
+  .container {
+    width: 360px;
+
+    .buttonsContainer {
+      width: 340px;
+
+      .div1 {
+        .button {
+          padding: 15.18% 0.02%;
+        }
+      }
+
+      .div2 {
+        .button {
+          padding: 15% 0.5%;
+        }
       }
     }
   }
